@@ -1,6 +1,7 @@
 # k8s-operator
 
-This will help you understand how to write `Operators` using `Kubebuilder` SDK which will help create a Custom Resource Definition, Custom Resource, Controllers and Reconciliation logic
+This will help you understand how to write `Operators` using `Kubebuilder` SDK which will help create a Custom Resource Definition, Custom Resource, Controllers and Reconciliation logic.
+Basically, Reconcile the `current` state to the `desired` state
 
 ## :mechanical_arm: Operator
 
@@ -41,6 +42,10 @@ make manifests
 - sample is a folder which provides a sample custom resource i.e an object ( YAML file)
 - This can be used to edit it as per the req to work with in cluster
 
+## :jigsaw: Schema
+
+- `TypeMeta` (which describes API version and Kind), and also contains `ObjectMeta`, which holds things like name, namespace, and labels.
+
 ## :traffic_light: Controller
 
 - Each controller implements a control loop that watches the cluster's shared state via the API server and makes changes needed, consistently bringing it back to the desired state.
@@ -49,6 +54,7 @@ make manifests
 ## :yo_yo: Reconciler
 
 - In every controller, the reconciler is the logic that’s triggered by cluster events. The reconcile function takes the name of an object and returns whether or not the state matches the desired state.
+- Need to implement the logic in the internal/controller/operator_controller.go file in the function `Reconcile()`
 
 > Note: make install will install our custom resource in the k8s cluster
 > make run will connect to the k8s cluster
